@@ -1,0 +1,49 @@
+﻿<UserControl
+    x:Class="GeoGravityOverDose.Views.Entity.CustomerModel.CustomerCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:GeoGravityOverDose.Views.Entity.CustomerModel"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="clr-namespace:GeoGravityOverDose.Views.Shared"
+    xmlns:ui="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:viewmodels="clr-namespace:GeoGravityOverDose.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:CustomerCardViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <StackPanel Margin="15">
+        <ui:ColorZone
+            Grid.Row="0"
+            CornerRadius="10"
+                      DataContext="{Binding Customer, RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <StackPanel VerticalAlignment="Center">
+                <shared:TextField
+                    x:Name="NameField"
+                    Label="Название"
+                    Text="{Binding Name}" />
+
+                <shared:TextField
+                    x:Name="PhoneField"
+                    Label="Номер телефона"
+                    Text="{Binding Phone}" />
+            </StackPanel>
+        </ui:ColorZone>
+        <ui:ColorZone Margin="0,10,0,0" CornerRadius="10">
+            <StackPanel Margin="10" VerticalAlignment="Center">
+                <ListBox x:Name="ProjectList">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Right" />
+                                <Button x:Name="DeleteProject" DockPanel.Dock="Left">
+                                    <ui:PackIcon Kind="CloseCircle" />
+                                </Button>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </ui:ColorZone>
+    </StackPanel>
+</UserControl>

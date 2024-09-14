@@ -1,0 +1,44 @@
+﻿<UserControl
+    x:Class="GeoGravityOverDose.Views.Pages.AuthorizationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:GeoGravityOverDose.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="clr-namespace:GeoGravityOverDose.Views.Shared"
+    xmlns:ui="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:viewmodels="clr-namespace:GeoGravityOverDose.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ui:Card Grid.Column="1" VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock
+                    Margin="15"
+                    HorizontalAlignment="Center"
+                    FontSize="18"
+                    Text="Авторизация" />
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="18"
+                    Text="{Binding FullTest}" />
+                <shared:TextField Label="Email" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
+                <shared:TextField Label="Пароль" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
+                <Button
+                    Margin="15"
+                    HorizontalAlignment="Center"
+                    Content="Войти"
+                    Style="{DynamicResource MaterialDesignFlatMidBgButton}" />
+            </StackPanel>
+
+        </ui:Card>
+
+
+    </Grid>
+</UserControl>
