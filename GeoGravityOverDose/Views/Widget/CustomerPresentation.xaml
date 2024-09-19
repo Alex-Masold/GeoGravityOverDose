@@ -23,13 +23,14 @@
             <shared:EntitiesList
                 x:Name="CustomersList"
                 Grid.Column="0"
+                Margin="15"
                 AddEntityCommand="{Binding AddCustomerCommand}"
                 DeleteEntityCommand="{Binding DeleteCustomerCommand}"
                 Entities="{Binding Customers}"
                 SelectedEntity="{Binding SelectedCustomer, Mode=TwoWay}" />
 
 
-            <entity:CustomerCard Grid.Column="1" Customer="{Binding SelectedCustomer}" />
+            <entity:CustomerCard x:Name="CustomerCard" Grid.Column="1" DataContext="{Binding CustomerCardViewModel}"/>
 
         </Grid>
     </ui:Card>

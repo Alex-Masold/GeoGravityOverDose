@@ -12,38 +12,55 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <StackPanel Margin="15">
-        <ui:ColorZone
-            Grid.Row="0"
-            CornerRadius="10"
-                      DataContext="{Binding Customer, RelativeSource={RelativeSource AncestorType=UserControl}}">
-            <StackPanel VerticalAlignment="Center">
-                <shared:TextField
-                    x:Name="NameField"
-                    Label="Название"
-                    Text="{Binding Name}" />
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ui:ColorZone Grid.Row="0" CornerRadius="10">
+            <StackPanel>
+                <Expander Background="Transparent" Header="{Binding Customer.FullName}">
+                    <StackPanel VerticalAlignment="Center">
+                        <shared:TextField
+                            x:Name="FirstNameField"
+                            Label="Имя"
+                            Text="{Binding Customer.FirstName}" />
 
+                        <shared:TextField
+                            x:Name="LastNameField"
+                            Label="Отчество/Второе имя"
+                            Text="{Binding Customer.LastName}" />
+                        <shared:TextField
+                            x:Name="FamilyField"
+                            Label="Фамилия"
+                            Text="{Binding Customer.Family}" />
+                    </StackPanel>
+                </Expander>
+                <Expander Background="Transparent" Header="Аккаунт">
+                    <StackPanel VerticalAlignment="Center">
+                        <shared:TextField
+                            x:Name="EmailField"
+                            Label="Почта"
+                            Text="{Binding Customer.Account.Email}" />
+
+                        <shared:TextField
+                            x:Name="PasswordField"
+                            Label="Пароль"
+                            Text="{Binding Customer.Account.Password}" />
+                    </StackPanel>
+                </Expander>
                 <shared:TextField
                     x:Name="PhoneField"
                     Label="Номер телефона"
-                    Text="{Binding Phone}" />
+                    Text="{Binding Customer.Phone}" />
             </StackPanel>
+
+
         </ui:ColorZone>
-        <ui:ColorZone Margin="0,10,0,0" CornerRadius="10">
-            <StackPanel Margin="10" VerticalAlignment="Center">
-                <ListBox x:Name="ProjectList">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <DockPanel>
-                                <TextBlock DockPanel.Dock="Right" />
-                                <Button x:Name="DeleteProject" DockPanel.Dock="Left">
-                                    <ui:PackIcon Kind="CloseCircle" />
-                                </Button>
-                            </DockPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
-        </ui:ColorZone>
-    </StackPanel>
+        <shared:EntitiesList
+            x:Name="ProjectList"
+            Grid.Row="1"
+            Margin="0,15,0,0"
+            Entities="{Binding Customer.Projects}" />
+    </Grid>
 </UserControl>

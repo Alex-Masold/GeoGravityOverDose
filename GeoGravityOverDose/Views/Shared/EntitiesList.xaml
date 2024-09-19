@@ -6,11 +6,14 @@
     xmlns:local="clr-namespace:GeoGravityOverDose.Views.Shared"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:util="clr-namespace:GeoGravityOverDose.Views.Shared.Utilities"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <util:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    </UserControl.Resources>
     <ui:ColorZone
-        Margin="15"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
         CornerRadius="10">
@@ -42,13 +45,14 @@
                             <TextBlock
                                 Grid.Column="0"
                                 VerticalAlignment="Center"
-                                Text="{Binding Name}" />
+                                Text="{Binding FullName}" />
                             <Button
                                 x:Name="DeleteEntityButton"
                                 Grid.Column="1"
                                 Command="{Binding DeleteEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 CommandParameter="{Binding}"
-                                Cursor="Hand">
+                                Cursor="Hand"
+                                    Visibility="{Binding AddEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}">
                                 <ui:PackIcon Kind="CloseCircle" />
                             </Button>
                         </Grid>
@@ -58,7 +62,7 @@
             <Button
                 x:Name="AddEntityButton"
                 Grid.Row="1"
-                Margin="0,0,28,-20"
+                Margin="0,5,28,-20"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Panel.ZIndex="1"
@@ -66,7 +70,8 @@
                 Content="{ui:PackIcon Kind=Plus,
                                       Size=22}"
                 DockPanel.Dock="Bottom"
-                Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}" />
+                Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}"
+                Visibility="{Binding AddEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}" />
         </Grid>
     </ui:ColorZone>
 </UserControl>

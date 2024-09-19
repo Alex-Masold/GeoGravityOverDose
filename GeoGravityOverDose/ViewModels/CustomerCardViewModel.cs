@@ -1,16 +1,19 @@
-﻿using GeoGravityOverDose.ViewModels.Base;
+﻿using GeoGravityOverDose.Models;
+using GeoGravityOverDose.ViewModels.Base;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System.Reactive.Linq;
 
 namespace GeoGravityOverDose.ViewModels
 {
     public class CustomerCardViewModel : BaseViewModel
     {
-        [Reactive]
-        public string Name { get; set; }
+        [Reactive]   
+        public Customer Customer { get; set; }
 
-        [Reactive]
-        public string Phone { get; set; }
-
-
+        public CustomerCardViewModel()
+        {
+   
+        }
     }
 }

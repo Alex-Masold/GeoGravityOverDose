@@ -5,6 +5,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Collections.ObjectModel;
 using System.Reactive;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
 namespace GeoGravityOverDose.ViewModels
@@ -20,14 +21,30 @@ namespace GeoGravityOverDose.ViewModels
                     .Bind(out ReadOnlyObservableCollection<Customer> customers)
                     .Subscribe();
 
+
             Customers = customers;
 
             for (int i = 0; i < 10; i++)
             {
-            var customer = new Customer { Name = $"new Customer {i}", Phone="00000000" };
+                var customer = new Customer { FirstName = "new", LastName = "Customer", Family = $"{i}", Phone="00000000" };
+
+                for (int j = 0; j < 10; j++)
+                {
+                    var project = new Project { Name = $"project{i}" };
+                    customer.Projects.Add(project);
+                }
 
                 _customersSource.Add(customer);
             }
+
+            SelectedCustomer = customers.FirstOrDefault();
+            CustomerCardViewModel = new CustomerCardViewModel();
+
+            this.WhenAnyValue(x => x.SelectedCustomer)
+               .Subscribe(customer =>
+               {
+                   CustomerCardViewModel.Customer = SelectedCustomer;
+               });
 
             AddCustomerCommand = ReactiveCommand.Create(AddCustomer);
             DeleteCustomerCommand = ReactiveCommand.Create<Customer>(DeleteCustomer);
@@ -37,13 +54,15 @@ namespace GeoGravityOverDose.ViewModels
 
         [Reactive]
         public Customer SelectedCustomer { get; set; }
+        [Reactive]
+        public CustomerCardViewModel CustomerCardViewModel { get; set; }
 
         public ReactiveCommand<Unit, Unit> AddCustomerCommand { get; }
         public ReactiveCommand<Customer, Unit> DeleteCustomerCommand { get; }
 
         public void AddCustomer()
         {
-            var customer = new Customer { Name = "new Customer", Phone="00000000" };
+            var customer = new Customer { FirstName = "new", LastName = "Customer", Family = "!", Phone="00000000" }; ;
             _customersSource.Add(customer);
         }
 

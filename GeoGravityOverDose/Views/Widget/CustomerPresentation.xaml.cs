@@ -1,5 +1,4 @@
-﻿using GeoGravityOverDose.Models;
-using GeoGravityOverDose.ViewModels;
+﻿using GeoGravityOverDose.ViewModels;
 using ReactiveUI;
 using System.Reactive.Disposables;
 using System.Windows;
@@ -15,25 +14,14 @@ namespace GeoGravityOverDose.Views.Widget
         public CustomerPresentation()
         {
             InitializeComponent();
-            ViewModel = new CustomerPresentationViewModel();
-
-            this.WhenActivated(disposable =>
-            {
-
-                this.WhenAnyValue(
-                    vm => vm.ViewModel.Customers)
-                    .BindTo(this, vm => vm.ViewModel.Customers);
-
-                this.Bind(this.ViewModel,
-                    vm => vm.SelectedCustomer,
-                    v => v.CustomersList.SelectedEntity)
-                .DisposeWith(disposable);
-            });
-
         }
 
         public static readonly DependencyProperty ViewModelProperty =
-            DependencyProperty.Register(nameof(ViewModel), typeof(CustomerPresentationViewModel), typeof(CustomerPresentation), null);
+            DependencyProperty.Register(
+                nameof(ViewModel),
+                typeof(CustomerPresentationViewModel),
+                typeof(CustomerPresentation),
+                new PropertyMetadata(null));
 
         public CustomerPresentationViewModel ViewModel
         {

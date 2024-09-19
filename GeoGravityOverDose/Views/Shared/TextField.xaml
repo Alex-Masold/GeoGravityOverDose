@@ -12,7 +12,7 @@
     <TextBox
         x:Name="textBox"
         Margin="10"
-        Padding="8,12,4,4"
+        Padding="8,15,4,4"
         Style="{DynamicResource MaterialDesignFilledTextBox}"
         Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
         TextChanged="TextBox_TextChanged"
