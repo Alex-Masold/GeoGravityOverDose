@@ -9,16 +9,19 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <TextBox
-        x:Name="textBox"
-        Margin="10"
-        Padding="8,15,4,4"
-        Style="{DynamicResource MaterialDesignFilledTextBox}"
-        Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
-        TextChanged="TextBox_TextChanged"
-        TextWrapping="Wrap">
-        <materialDesign:HintAssist.Hint>
-            <TextBlock x:Name="label" FontSize="16" />
-        </materialDesign:HintAssist.Hint>
-    </TextBox>
+    <Grid>
+        <TextBox
+            x:Name="textBox"
+            Margin="10"
+            Padding="8,15,4,4"
+            Style="{DynamicResource MaterialDesignFilledTextBox}"
+            Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
+            TextChanged="TextBox_TextChanged"
+            TextWrapping="Wrap">
+            <materialDesign:HintAssist.Hint>
+                <TextBlock x:Name="label" FontSize="16" />
+            </materialDesign:HintAssist.Hint>
+        </TextBox>
+        <materialDesign:Snackbar MessageQueue="{Binding SnackbarMessageQueue, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+    </Grid>
 </UserControl>

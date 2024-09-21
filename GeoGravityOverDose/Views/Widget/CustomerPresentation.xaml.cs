@@ -14,6 +14,8 @@ namespace GeoGravityOverDose.Views.Widget
         public CustomerPresentation()
         {
             InitializeComponent();
+            ViewModel = new CustomerPresentationViewModel();
+            DataContext = ViewModel;
         }
 
         public static readonly DependencyProperty ViewModelProperty =

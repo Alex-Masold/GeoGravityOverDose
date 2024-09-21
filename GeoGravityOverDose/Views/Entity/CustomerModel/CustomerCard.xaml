@@ -8,7 +8,7 @@
     xmlns:shared="clr-namespace:GeoGravityOverDose.Views.Shared"
     xmlns:ui="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:viewmodels="clr-namespace:GeoGravityOverDose.ViewModels"
-    d:DataContext="{d:DesignInstance Type=viewmodels:CustomerCardViewModel}"
+    d:DataContext="{d:DesignInstance Type=viewmodels:CustomerPresentationViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -19,21 +19,22 @@
         </Grid.RowDefinitions>
         <ui:ColorZone Grid.Row="0" CornerRadius="10">
             <StackPanel>
-                <Expander Background="Transparent" Header="{Binding Customer.FullName}">
+                <Expander Background="Transparent" Header="{Binding SelectedCustomer.FullName}">
                     <StackPanel VerticalAlignment="Center">
                         <shared:TextField
                             x:Name="FirstNameField"
                             Label="Имя"
-                            Text="{Binding Customer.FirstName}" />
+                            ShowSnackBar="True"
+                            Text="{Binding SelectedCustomer.FirstName}" />
 
                         <shared:TextField
                             x:Name="LastNameField"
                             Label="Отчество/Второе имя"
-                            Text="{Binding Customer.LastName}" />
+                            Text="{Binding SelectedCustomer.LastName}" />
                         <shared:TextField
                             x:Name="FamilyField"
                             Label="Фамилия"
-                            Text="{Binding Customer.Family}" />
+                            Text="{Binding SelectedCustomer.Family}" />
                     </StackPanel>
                 </Expander>
                 <Expander Background="Transparent" Header="Аккаунт">
@@ -41,18 +42,18 @@
                         <shared:TextField
                             x:Name="EmailField"
                             Label="Почта"
-                            Text="{Binding Customer.Account.Email}" />
+                            Text="{Binding SelectedCustomer.Account.Email}" />
 
                         <shared:TextField
                             x:Name="PasswordField"
                             Label="Пароль"
-                            Text="{Binding Customer.Account.Password}" />
+                            Text="{Binding SelectedCustomer.Account.Password}" />
                     </StackPanel>
                 </Expander>
                 <shared:TextField
                     x:Name="PhoneField"
                     Label="Номер телефона"
-                    Text="{Binding Customer.Phone}" />
+                    Text="{Binding SelectedCustomer.Phone}" />
             </StackPanel>
 
 
@@ -61,6 +62,7 @@
             x:Name="ProjectList"
             Grid.Row="1"
             Margin="0,15,0,0"
-            Entities="{Binding Customer.Projects}" />
+            Entities="{Binding SelectedCustomer.Projects}" />
+
     </Grid>
 </UserControl>

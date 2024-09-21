@@ -17,20 +17,13 @@ namespace GeoGravityOverDose.Views.Entity.CustomerModel
             InitializeComponent();
         }
 
-        public static readonly DependencyProperty CustomerProperty =
-            DependencyProperty.Register(
-                nameof(Customer),
-                typeof(Customer),
-                typeof(CustomerCard),
-                new PropertyMetadata(null));
-        
-        public Customer Customer { 
-            get => (Customer)GetValue(CustomerProperty); 
-            set => SetValue(CacheModeProperty, value); 
-        }
 
         public static readonly DependencyProperty ViewModelProperty =
-            DependencyProperty.Register(nameof(ViewModel), typeof(CustomerCardViewModel), typeof(CustomerPresentationViewModel), null);
+            DependencyProperty.Register(
+                nameof(ViewModel), 
+                typeof(CustomerCardViewModel), 
+                typeof(CustomerCard), 
+                null);
 
         public CustomerCardViewModel ViewModel
         {

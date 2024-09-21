@@ -18,13 +18,13 @@ namespace GeoGravityOverDose.Views.Shared
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register(
                 nameof(Entities),
-                typeof(IEnumerable),
+                typeof(ICollection),
                 typeof(EntitiesList),
                 new PropertyMetadata(null));
 
-        public IEnumerable Entities
+        public ICollection Entities
         {
-            get => (IEnumerable)GetValue(ItemsSourceProperty);
+            get => (ICollection)GetValue(ItemsSourceProperty);
             set => SetValue(ItemsSourceProperty, value);
         }
 
