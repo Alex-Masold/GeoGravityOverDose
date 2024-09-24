@@ -51,29 +51,7 @@ namespace GeoGravityOverDose.ViewModels
 
             AddCustomerCommand = ReactiveCommand.Create(AddCustomer);
             DeleteCustomerCommand = ReactiveCommand.Create<Customer>(DeleteCustomer);
-
-        //    this.WhenAnyValue(x => x.SelectedCustomer)
-        //.Subscribe(customer =>
-        //{
-        //    if (customer != null)
-        //    {
-        //        _previousFirstName = customer.FirstName;
-        //        _previousLastName = customer.LastName;
-        //        _previousFamily = customer.Family;
-        //    }
-        //});
-
-        //    this.WhenAnyValue(x => x.SelectedCustomer.FirstName)
-        //        .Throttle(TimeSpan.FromMilliseconds(500))
-        //        .DistinctUntilChanged()
-        //        .Subscribe(newFirstName =>
-        //        {
-        //            if (SelectedCustomer != null)
-        //            {
-        //                ShowSnackbar(_previousFirstName, newFirstName, "Имя");
-        //                _previousFirstName = newFirstName;
-        //            }
-        //        });
+            TestMessageCommand = ReactiveCommand.Create(TestMessage);
         }
 
         public ReadOnlyObservableCollection<Customer> Customers { get; }
@@ -85,6 +63,7 @@ namespace GeoGravityOverDose.ViewModels
 
         public ReactiveCommand<Unit, Unit> AddCustomerCommand { get; }
         public ReactiveCommand<Customer, Unit> DeleteCustomerCommand { get; }
+        public ReactiveCommand<Unit, Unit> TestMessageCommand { get; }
 
         public void AddCustomer()
         {
@@ -97,22 +76,14 @@ namespace GeoGravityOverDose.ViewModels
             _customersSource.Remove(customer);
         }
 
+        public void TestMessage()
+        {
+            MessageBox.Show("1");
+        }
+
         public void NotifyCustomerUpdated(Customer customer)
         {
             _customerUpdatedSubject.OnNext(customer);
-        }
-
-        private void ShowSnackbar(string oldValue, string newValue, string fieldName)
-        {
-            // Пример использования Snackbar
-            if (oldValue != null)
-            {
-                MessageBox.Show($"{fieldName} изменено: {oldValue} => {newValue}");
-            }
-
-            // Здесь вы можете вызвать Snackbar или другую систему уведомлений
-            // Например, вызов Snackbar для WPF:
-            // SnackbarMessageQueue.Enqueue($"{fieldName} изменено: {oldValue} => {newValue}");
         }
     }
 }

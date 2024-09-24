@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using MaterialDesignThemes.Wpf;
+using System.Windows;
 
 namespace GeoGravityOverDose.Views.Pages
 {
@@ -7,9 +8,11 @@ namespace GeoGravityOverDose.Views.Pages
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+            GlobalSnackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(500));
         }
     }
 }

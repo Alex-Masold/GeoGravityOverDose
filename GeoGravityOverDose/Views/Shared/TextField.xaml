@@ -22,6 +22,5 @@
                 <TextBlock x:Name="label" FontSize="16" />
             </materialDesign:HintAssist.Hint>
         </TextBox>
-        <materialDesign:Snackbar MessageQueue="{Binding SnackbarMessageQueue, RelativeSource={RelativeSource AncestorType=UserControl}}" />
     </Grid>
 </UserControl>

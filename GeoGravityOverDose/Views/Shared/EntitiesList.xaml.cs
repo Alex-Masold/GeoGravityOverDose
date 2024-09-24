@@ -33,7 +33,10 @@ namespace GeoGravityOverDose.Views.Shared
                 nameof(SelectedEntity),
                 typeof(object),
                 typeof(EntitiesList),
-                new PropertyMetadata(null, OnSelectedEntityChanged));
+                new FrameworkPropertyMetadata(
+                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                    OnSelectedEntityChanged)
+                );
 
         public object SelectedEntity
         {

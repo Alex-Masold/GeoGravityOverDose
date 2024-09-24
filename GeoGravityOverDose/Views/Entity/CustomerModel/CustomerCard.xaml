@@ -19,44 +19,39 @@
         </Grid.RowDefinitions>
         <ui:ColorZone Grid.Row="0" CornerRadius="10">
             <StackPanel>
-                <Expander Background="Transparent" Header="{Binding SelectedCustomer.FullName}">
+                <Expander Background="Transparent"
+                          Header="{Binding SelectedCustomer.FullName}">
                     <StackPanel VerticalAlignment="Center">
-                        <shared:TextField
-                            x:Name="FirstNameField"
-                            Label="Имя"
-                            ShowSnackBar="True"
-                            Text="{Binding SelectedCustomer.FirstName}" />
+                        <shared:TextField x:Name="FirstNameField"
+                                          CallBackCommand="{Binding TestMessageCommand}"
+                                          Label="Имя"
+                                          ShowSnackBar="True"
+                                          Text="{Binding SelectedCustomer.FirstName}" />
 
-                        <shared:TextField
-                            x:Name="LastNameField"
-                            Label="Отчество/Второе имя"
-                            Text="{Binding SelectedCustomer.LastName}" />
-                        <shared:TextField
-                            x:Name="FamilyField"
-                            Label="Фамилия"
-                            Text="{Binding SelectedCustomer.Family}" />
+                        <shared:TextField x:Name="LastNameField"
+                                          Label="Отчество/Второе имя"
+                                          Text="{Binding SelectedCustomer.LastName}" />
+                        <shared:TextField x:Name="FamilyField"
+                                          Label="Фамилия"
+                                          Text="{Binding SelectedCustomer.Family}" />
                     </StackPanel>
                 </Expander>
-                <Expander Background="Transparent" Header="Аккаунт">
+                <Expander Background="Transparent"
+                          Header="Аккаунт">
                     <StackPanel VerticalAlignment="Center">
-                        <shared:TextField
-                            x:Name="EmailField"
-                            Label="Почта"
-                            Text="{Binding SelectedCustomer.Account.Email}" />
+                        <shared:TextField x:Name="EmailField"
+                                          Label="Почта"
+                                          Text="{Binding SelectedCustomer.Account.Email}" />
 
-                        <shared:TextField
-                            x:Name="PasswordField"
-                            Label="Пароль"
-                            Text="{Binding SelectedCustomer.Account.Password}" />
+                        <shared:TextField x:Name="PasswordField"
+                                          Label="Пароль"
+                                          Text="{Binding SelectedCustomer.Account.Password}" />
                     </StackPanel>
                 </Expander>
-                <shared:TextField
-                    x:Name="PhoneField"
-                    Label="Номер телефона"
-                    Text="{Binding SelectedCustomer.Phone}" />
+                <shared:TextField x:Name="PhoneField"
+                                  Label="Номер телефона"
+                                  Text="{Binding SelectedCustomer.Phone}" />
             </StackPanel>
-
-
         </ui:ColorZone>
         <shared:EntitiesList
             x:Name="ProjectList"
