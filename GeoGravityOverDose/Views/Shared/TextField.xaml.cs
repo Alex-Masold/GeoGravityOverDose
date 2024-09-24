@@ -1,8 +1,5 @@
-﻿using GeoGravityOverDose.ViewModels;
-using GeoGravityOverDose.Views.Entity.CustomerModel;
-using GeoGravityOverDose.Views.Pages;
-using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel;
+﻿using GeoGravityOverDose.Views.Pages;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -62,8 +59,8 @@ namespace GeoGravityOverDose.Views.Shared
             {
                 SetValue(TextProperty, textBox.Text);
 
-                _inputTimer.Stop();
-                _inputTimer.Start();
+                //_inputTimer.Stop();
+                //_inputTimer.Start();
             }
         }
 
@@ -91,6 +88,28 @@ namespace GeoGravityOverDose.Views.Shared
             set => SetValue(ShowSnackBarProperty, value);
         }
 
+        public void GotFocus()
+        {
+            _previousValue = Text;
+        }
+
+        public void LostFocus()
+        {
+            string displayText = string.IsNullOrWhiteSpace(Text) ? "Пустая строка" : Text;
+            if (ShowSnackBar && _previousValue != Text)
+            {
+                var mainWindow = Application.Current.MainWindow as MainWindow;
+                mainWindow.GlobalSnackbar.MessageQueue.Enqueue($"{label.Text}: {_previousValue} -> {displayText}");
+            }
+
+            _previousValue = displayText;
+
+            if (CallBackCommand != null && CallBackCommand.CanExecute(null))
+            {
+                CallBackCommand.Execute(null);
+            }
+        }
+
         private void InputTimer_Tick(object sender, EventArgs e)
         {
             _inputTimer.Stop();
@@ -112,33 +131,11 @@ namespace GeoGravityOverDose.Views.Shared
         public TextField()
         {
             InitializeComponent();
-            _previousValue = Text;
 
-            _inputTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
-            _inputTimer.Tick += InputTimer_Tick;
 
-            this.DataContextChanged += OnDataContextChanged;
-        }
+            //_inputTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+            //_inputTimer.Tick += InputTimer_Tick;
 
-        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (e.OldValue is CustomerPresentationViewModel oldViewModel)
-            {
-                oldViewModel.PropertyChanged -= OnSelectedCustomerChanged;
-            }
-
-            if (e.NewValue is CustomerPresentationViewModel newViewModel)
-            {
-                newViewModel.PropertyChanged += OnSelectedCustomerChanged;
-            }
-        }
-
-        private void OnSelectedCustomerChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(CustomerPresentationViewModel.SelectedCustomer))
-            {
-                _previousValue = Text;
-            }
         }
     }
 }

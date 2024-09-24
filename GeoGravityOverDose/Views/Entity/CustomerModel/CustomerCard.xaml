@@ -6,58 +6,70 @@
     xmlns:local="clr-namespace:GeoGravityOverDose.Views.Entity.CustomerModel"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="clr-namespace:GeoGravityOverDose.Views.Shared"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:ui="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:viewmodels="clr-namespace:GeoGravityOverDose.ViewModels"
     d:DataContext="{d:DesignInstance Type=viewmodels:CustomerPresentationViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid Margin="15">
+    <Grid Name="qq" Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ui:ColorZone Grid.Row="0" CornerRadius="10">
-            <StackPanel>
-                <Expander Background="Transparent"
-                          Header="{Binding SelectedCustomer.FullName}">
-                    <StackPanel VerticalAlignment="Center">
-                        <shared:TextField x:Name="FirstNameField"
-                                          CallBackCommand="{Binding TestMessageCommand}"
-                                          Label="Имя"
-                                          ShowSnackBar="True"
-                                          Text="{Binding SelectedCustomer.FirstName}" />
+            <TabControl>
+                <TabItem Header="Личные данные">
+                    <StackPanel>
+                        <Expander Background="Transparent"
+                                  Header="{Binding SelectedCustomer.FullName}">
+                            <StackPanel VerticalAlignment="Center">
+                                <shared:TextField x:Name="FirstNameField"
+                                                  CallBackCommand="{Binding TestMessageCommand}"
+                                                  Label="Имя"
+                                                  ShowSnackBar="True"
+                                                  Text="{Binding SelectedCustomer.FirstName}" />
 
-                        <shared:TextField x:Name="LastNameField"
-                                          Label="Отчество/Второе имя"
-                                          Text="{Binding SelectedCustomer.LastName}" />
-                        <shared:TextField x:Name="FamilyField"
-                                          Label="Фамилия"
-                                          Text="{Binding SelectedCustomer.Family}" />
-                    </StackPanel>
-                </Expander>
-                <Expander Background="Transparent"
-                          Header="Аккаунт">
-                    <StackPanel VerticalAlignment="Center">
-                        <shared:TextField x:Name="EmailField"
-                                          Label="Почта"
-                                          Text="{Binding SelectedCustomer.Account.Email}" />
+                                <shared:TextField x:Name="LastNameField"
+                                                  Label="Отчество/Второе имя"
+                                                  Text="{Binding SelectedCustomer.LastName}" />
+                                <shared:TextField x:Name="FamilyField"
+                                                  Label="Фамилия"
+                                                  Text="{Binding SelectedCustomer.Family}" />
+                            </StackPanel>
+                        </Expander>
+                        <Expander Background="Transparent"
+                                  Header="Аккаунт">
+                            <StackPanel VerticalAlignment="Center">
+                                <shared:TextField x:Name="EmailField"
+                                                  Label="Почта"
+                                                  Text="{Binding SelectedCustomer.Account.Email}" />
 
-                        <shared:TextField x:Name="PasswordField"
-                                          Label="Пароль"
-                                          Text="{Binding SelectedCustomer.Account.Password}" />
+                                <shared:TextField x:Name="PasswordField"
+                                                  Label="Пароль"
+                                                  Text="{Binding SelectedCustomer.Account.Password}" />
+                            </StackPanel>
+                        </Expander>
+                        <shared:TextField x:Name="PhoneField"
+                                          Label="Номер телефона"
+                                          Text="{Binding SelectedCustomer.Phone}" />
                     </StackPanel>
-                </Expander>
-                <shared:TextField x:Name="PhoneField"
-                                  Label="Номер телефона"
-                                  Text="{Binding SelectedCustomer.Phone}" />
-            </StackPanel>
+                </TabItem>
+                <TabItem Header="Проекты">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <shared:EntitiesList x:Name="ProjectList"
+                                             Grid.Row="1"
+                                             Margin="0,15,0,0"
+                                             Entities="{Binding SelectedCustomer.Projects}" />
+
+                    </Grid>
+                </TabItem>
+            </TabControl>
         </ui:ColorZone>
-        <shared:EntitiesList
-            x:Name="ProjectList"
-            Grid.Row="1"
-            Margin="0,15,0,0"
-            Entities="{Binding SelectedCustomer.Projects}" />
 
     </Grid>
 </UserControl>
