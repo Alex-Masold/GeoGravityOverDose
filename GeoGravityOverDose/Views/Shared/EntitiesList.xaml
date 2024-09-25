@@ -37,9 +37,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
-                                <!--  Растягивающийся столбец для TextBlock  -->
                                 <ColumnDefinition Width="Auto" />
-                                <!--  Автоматический размер для кнопки  -->
                             </Grid.ColumnDefinitions>
 
                             <TextBlock

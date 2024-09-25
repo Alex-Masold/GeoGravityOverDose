@@ -36,5 +36,10 @@ namespace GeoGravityOverDose.Views.Widget
             get => ViewModel;
             set => ViewModel = (CustomerPresentationViewModel)value;
         }
+
+        private void PackIconKind_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
     }
 }

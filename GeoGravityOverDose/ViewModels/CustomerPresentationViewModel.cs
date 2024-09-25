@@ -4,6 +4,7 @@ using GeoGravityOverDose.ViewModels.Base;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Contracts;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
@@ -15,10 +16,6 @@ namespace GeoGravityOverDose.ViewModels
     {
         private readonly SourceList<Customer> _customersSource = new SourceList<Customer>();
         private readonly Subject<Customer> _customerUpdatedSubject = new Subject<Customer>();
-
-        private string _previousFirstName;
-        private string _previousLastName;
-        private string _previousFamily;
 
         public CustomerPresentationViewModel()
         {
@@ -45,10 +42,6 @@ namespace GeoGravityOverDose.ViewModels
 
             SelectedCustomer = customers.FirstOrDefault();
 
-            _previousFirstName = SelectedCustomer.FirstName;
-            _previousLastName = SelectedCustomer.LastName;
-            _previousFamily = SelectedCustomer.Family;
-
             AddCustomerCommand = ReactiveCommand.Create(AddCustomer);
             DeleteCustomerCommand = ReactiveCommand.Create<Customer>(DeleteCustomer);
             TestMessageCommand = ReactiveCommand.Create(TestMessage);
@@ -58,8 +51,10 @@ namespace GeoGravityOverDose.ViewModels
 
         [Reactive]
         public Customer SelectedCustomer { get; set; }
-        [Reactive]
-        //public CustomerCardViewModel CustomerCardViewModel { get; set; }
+
+        public int MaxLengthName { get; set; } = 20;
+        public int MaxLengthPassword { get; set; } = 10;
+        public int MaxLengthPhone { get; set; } = 15;
 
         public ReactiveCommand<Unit, Unit> AddCustomerCommand { get; }
         public ReactiveCommand<Customer, Unit> DeleteCustomerCommand { get; }

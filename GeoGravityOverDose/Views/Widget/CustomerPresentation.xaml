@@ -1,18 +1,19 @@
-﻿<UserControl x:Class="GeoGravityOverDose.Views.Widget.CustomerPresentation"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:entity="clr-namespace:GeoGravityOverDose.Views.Entity.CustomerModel"
-             xmlns:local="clr-namespace:GeoGravityOverDose.Views.Widget"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:shared="clr-namespace:GeoGravityOverDose.Views.Shared"
-             xmlns:ui="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:viewmodels="clr-namespace:GeoGravityOverDose.ViewModels"
-             x:Name="CustomerPresentationControl"
-             d:DataContext="{d:DesignInstance Type=viewmodels:CustomerPresentationViewModel}"
-             d:DesignHeight="450"
-             d:DesignWidth="800"
-             mc:Ignorable="d">
+﻿<UserControl
+    x:Class="GeoGravityOverDose.Views.Widget.CustomerPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:entity="clr-namespace:GeoGravityOverDose.Views.Entity.CustomerModel"
+    xmlns:local="clr-namespace:GeoGravityOverDose.Views.Widget"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="clr-namespace:GeoGravityOverDose.Views.Shared"
+    xmlns:ui="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:viewmodels="clr-namespace:GeoGravityOverDose.ViewModels"
+    x:Name="CustomerPresentationControl"
+    d:DataContext="{d:DesignInstance Type=viewmodels:CustomerPresentationViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <ui:Card>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -20,17 +21,50 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <shared:EntitiesList x:Name="CustomersList"
-                                 Grid.Column="0"
-                                 Margin="15"
-                                 AddEntityCommand="{Binding AddCustomerCommand}"
-                                 DeleteEntityCommand="{Binding DeleteCustomerCommand}"
-                                 Entities="{Binding Customers}"
-                                 SelectedEntity="{Binding SelectedCustomer, Mode=TwoWay}" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ui:ColorZone Margin="15,15,15,0" CornerRadius="10">
+
+                    <Grid Margin="10,10,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <ui:PackIcon
+                            Grid.Column="1"
+                            Width="24"
+                            Height="24"
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            Kind="Magnify" />
+
+                        <TextBox
+                            Grid.Column="0"
+                            Padding="5"
+                            ui:TextFieldAssist.HasClearButton="True"
+                            Style="{DynamicResource MaterialDesignOutlinedTextBox}" />
+                    </Grid>
+
+                </ui:ColorZone>
+
+                <shared:EntitiesList
+                    x:Name="CustomersList"
+                    Grid.Row="1"
+                    Margin="15"
+                    AddEntityCommand="{Binding AddCustomerCommand}"
+                    DeleteEntityCommand="{Binding DeleteCustomerCommand}"
+                    Entities="{Binding Customers}"
+                    SelectedEntity="{Binding SelectedCustomer, Mode=TwoWay}" />
+            </Grid>
 
 
-            <entity:CustomerCard x:Name="CustomerCard"
-                                 Grid.Column="1"/>
+
+            <entity:CustomerCard x:Name="CustomerCard" Grid.Column="1" />
 
         </Grid>
     </ui:Card>
