@@ -25,7 +25,7 @@
                         VerticalAlignment="Stretch"
                         CornerRadius="10">
                         <StackPanel>
-                            <Expander Background="Transparent" Header="{Binding SelectedCustomer.FullName}">
+                            <Expander Background="Transparent" Header="{Binding Customer.FullName}">
                                 <StackPanel VerticalAlignment="Center">
                                     <shared:TextField
                                         x:Name="FirstNameField"
@@ -33,18 +33,18 @@
                                         Label="Имя"
                                         MaxLength="{Binding MaxLengthName}"
                                         ShowSnackBar="True"
-                                        Text="{Binding SelectedCustomer.FirstName}" />
+                                        Text="{Binding Customer.FirstName}" />
 
                                     <shared:TextField
                                         x:Name="LastNameField"
                                         Label="Отчество/Второе имя"
                                         MaxLength="{Binding MaxLengthName}"
-                                        Text="{Binding SelectedCustomer.LastName}" />
+                                        Text="{Binding Customer.LastName}" />
                                     <shared:TextField
                                         x:Name="FamilyField"
                                         Label="Фамилия"
                                         MaxLength="{Binding MaxLengthName}"
-                                        Text="{Binding SelectedCustomer.Family}" />
+                                        Text="{Binding Customer.Family}" />
                                 </StackPanel>
                             </Expander>
                             <Expander Background="Transparent" Header="Аккаунт">
@@ -52,29 +52,29 @@
                                     <shared:TextField
                                         x:Name="EmailField"
                                         Label="Почта"
-                                        Text="{Binding SelectedCustomer.Account.Email}" />
+                                        Text="{Binding Customer.Account.Email}" />
 
                                     <shared:TextField
                                         x:Name="PasswordField"
                                         Label="Пароль"
                                         MaxLength="{Binding MaxLengthPassword}"
-                                        Text="{Binding SelectedCustomer.Account.Password}" />
+                                        Text="{Binding Customer.Account.Password}" />
                                 </StackPanel>
                             </Expander>
                             <shared:TextField
                                 x:Name="PhoneField"
                                 Label="Номер телефона"
                                 MaxLength="{Binding MaxLengthPhone}"
-                                Text="{Binding SelectedCustomer.Phone}" />
+                                Text="{Binding Customer.Phone}" />
                         </StackPanel>
                     </ui:ColorZone>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Проекты">
+            <TabItem Header="Проекты">  
                 <shared:EntitiesList
                     x:Name="ProjectList"
                     Grid.Row="1"
-                    Entities="{Binding SelectedCustomer.Projects}" />
+                    Entities="{Binding Customer.Projects}" />
             </TabItem>
         </TabControl>
     </Grid>

@@ -35,19 +35,22 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <ui:PackIcon
-                            Grid.Column="1"
-                            Width="24"
-                            Height="24"
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            Kind="Magnify" />
+                        <Button x:Name="SearchButton"
+                                Grid.Column="1"
+                                Width="24"
+                                Height="24"
+                                Command="{Binding SearchCommand}"
+                                CommandParameter="{Binding ElementName=SearchBox, Path=Text}"
+                                Style="{StaticResource MaterialDesignToolButton}">
+                            <ui:PackIcon Kind="Magnify" />
+                        </Button>
 
-                        <TextBox
+                        <TextBox x:Name="SearchBox"
                             Grid.Column="0"
                             Padding="5"
                             ui:TextFieldAssist.HasClearButton="True"
-                            Style="{DynamicResource MaterialDesignOutlinedTextBox}" />
+                            Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                            Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                 </ui:ColorZone>
@@ -64,7 +67,10 @@
 
 
 
-            <entity:CustomerCard x:Name="CustomerCard" Grid.Column="1" />
+            <entity:CustomerCard
+                x:Name="CustomerCard"
+                Grid.Column="1"
+                DataContext="{Binding CustomerCardViewModel}" />
 
         </Grid>
     </ui:Card>

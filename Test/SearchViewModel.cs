@@ -2,6 +2,7 @@
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
@@ -14,7 +15,7 @@ namespace Test
         [Reactive] public string SearchQuery { get; set; }
 
         // Автопоиск
-        [Reactive] public bool AutoSearch { get; set; }
+        [Reactive] public bool AutoSearch { get; set; } = true;
 
         // Коллекция для результатов поиска
         private readonly SourceList<string> _searchSource;
@@ -104,15 +105,12 @@ namespace Test
         // Асинхронный метод поиска
         private async Task<ICollection<string>> SearchAsync(string query, CancellationToken token)
         {
+            query = query.Trim();
+
             await Task.Delay(1000, token);
 
-            if (token.IsCancellationRequested)
-                return new List<string>(); // Возвращаем пустой список при отмене
-
-            if (string.IsNullOrEmpty(query))
-            {
+            if (string.IsNullOrEmpty(query) || string.IsNullOrWhiteSpace(query))
                 return _dataSource;
-            }
 
             // Реальная логика поиска по данным
             var result = _dataSource

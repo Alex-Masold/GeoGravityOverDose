@@ -1,6 +1,5 @@
 ﻿using GeoGravityOverDose.ViewModels;
 using ReactiveUI;
-using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Controls;
 

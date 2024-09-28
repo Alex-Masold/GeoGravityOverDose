@@ -13,6 +13,7 @@ namespace GeoGravityOverDose.Views.Shared
     public partial class TextField : UserControl
     {
         private string _previousValue;
+        private string _displayText;
         MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
 
         public ReactiveCommand<Unit, Unit> GotFocusCommand { get; set; }
@@ -105,12 +106,14 @@ namespace GeoGravityOverDose.Views.Shared
 
         private void OnGotFocus()
         {
-            _previousValue = Text;
+            _displayText = string.IsNullOrWhiteSpace(Text) ? "Пустая строка" : Text;
+            if (_previousValue != Text)
+                _previousValue = _displayText;
         }
 
         private void OnLostFocus()
         {
-            string displayText = string.IsNullOrWhiteSpace(Text) ? "Пустая строка" : Text;
+            _displayText = string.IsNullOrWhiteSpace(Text) ? "Пустая строка" : Text;
             if (_previousValue != Text)
             {
                 if (CallBackCommand != null && CallBackCommand.CanExecute(null))
@@ -119,11 +122,11 @@ namespace GeoGravityOverDose.Views.Shared
                 }
                 if (ShowSnackBar)
                 {
-                    mainWindow.GlobalSnackbar.MessageQueue.Enqueue($"{label.Text}: {_previousValue} -> {displayText}");
+                    mainWindow.GlobalSnackbar.MessageQueue.Enqueue($"{label.Text}: {_previousValue} -> {_displayText}");
                 }
             }
 
-            _previousValue = displayText;
+            _previousValue = _displayText;
 
 
         }
