@@ -37,5 +37,10 @@ namespace GeoGravityOverDose.Models
         public double Ra { get; set; }
         public double Th { get; set; }
         public double K { get; set; }
+
+        public Picket(Profile profile)
+        {
+            Profile=profile;
+        }
     }
 }

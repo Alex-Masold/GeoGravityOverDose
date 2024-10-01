@@ -1,9 +1,15 @@
-﻿using GeoGravityOverDose.Models;
+﻿using Castle.Core.Resource;
+using CommunityToolkit.Mvvm.Input;
+using GeoGravityOverDose.Models;
 using GeoGravityOverDose.Models.Base;
 using GeoGravityOverDose.ViewModels.Base;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace GeoGravityOverDose.Views.Entity.AreaEntuty
@@ -22,6 +28,11 @@ namespace GeoGravityOverDose.Views.Entity.AreaEntuty
         [Reactive]
         public Profile SelectedProfile { get; set; }
 
+        public IReactiveCommand<Unit, Unit> AddPointCommand { get; }
+        public IReactiveCommand<Unit, Unit> GeneratePointCommand { get; }
+        public IReactiveCommand<AreaPoint, Unit> DeletePointCommand { get; }
+
+        public IReactiveCommand<object, Unit> ZoomCommand { get; }
         private void Redraw()
         {
             var vd = new VisDraw();
@@ -41,16 +52,83 @@ namespace GeoGravityOverDose.Views.Entity.AreaEntuty
             // Обновляем изображение
             Image = vd.Render();
         }
-
-        public AreaCardViewModel()
+        private void Zoom(object obj)
         {
+            var e = (MouseWheelEventArgs)obj;
+            var image = (Image)e.Source;
+
+            double delta = e.Delta > 0 ? 0.1 : -0.1;
+            double scaleX = image.RenderTransform.Value.M11 + delta;
+            double scaleY = image.RenderTransform.Value.M22 + delta;
+
+            if (scaleX < 1 || scaleY < 1) return;
+
+            image.RenderTransform = new ScaleTransform(scaleX, scaleY);
+            var vp = e.MouseDevice.GetPosition(image);
+            image.RenderTransformOrigin = new Point(vp.X/image.ActualWidth, vp.Y/image.ActualHeight);
+        }
+        private void AddPoint()
+        {
+            var newPoint = new AreaPoint() { X=0, Y=0, Area=Area };
+            Area.Points.Add(newPoint);
+            SelectedPoint = newPoint;
+            Redraw();
+        }
+        private void GeneratePoint()
+        {
+
+            AreaPoint previosPoint = Area.Points?.Count > 0 ? Area.Points.Last() : new() { X = 0, Y = 0 }, point;
+            int off = 25;
+            Random r = new();
+            while (true)
+            {
+                point = new AreaPoint() { X = previosPoint.X + r.Next(-off, off), Y = previosPoint.Y + r.Next(-off, off), Area = Area };
+                Area.Points.Add(point);
+                if (Area.IsCorrect()) break;
+                else Area.Points.Remove(point);
+            }
+            SelectedPoint = point;
+            Redraw();
+
+
+        }
+        private void DeletePoint(AreaPoint point)
+        {
+            var _deletedCustomerIndex = Area.Points.IndexOf(point);
+            var _SelectedPointIndex = Area.Points.IndexOf(SelectedPoint);
+            Area.Points.Remove(point);
+            Redraw();
+
+            if (_deletedCustomerIndex == _SelectedPointIndex)
+            {
+                if (_deletedCustomerIndex == 0)
+                { SelectedPoint = Area.Points.FirstOrDefault(); }
+                else if (_deletedCustomerIndex == Area.Points.Count)
+                { SelectedPoint = Area.Points.LastOrDefault(); }
+                else if (_deletedCustomerIndex > 0 && _deletedCustomerIndex < Area.Points.Count)
+                { SelectedPoint = Area.Points[_deletedCustomerIndex]; }
+            }
+        }
+        public AreaCardViewModel(Area area)
+        {
+            Area = area;
+
+            ZoomCommand = ReactiveCommand.Create<object>(Zoom);
+            AddPointCommand = ReactiveCommand.Create(AddPoint);
+            GeneratePointCommand = ReactiveCommand.Create(GeneratePoint);
+            DeletePointCommand = ReactiveCommand.Create<AreaPoint>(DeletePoint);
+
             this.WhenAnyValue(x => x.SelectedPoint)
-                .Where(x => x != null)
-                .Subscribe(_ => Redraw());
+                .Subscribe(_ => Redraw());  
 
             this.WhenAnyValue(x => x.SelectedProfile)
+                .Subscribe(_ => Redraw());
+
+            this.WhenAnyValue(x => x.Area)
                 .Where(x => x != null)
                 .Subscribe(_ => Redraw());
+
+            Redraw();
         }
     }
 }

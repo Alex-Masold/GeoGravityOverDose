@@ -8,6 +8,18 @@ namespace GeoGravityOverDose.Models
 {
     public class Profile : IdClass
     {
+        [Reactive]
+        public Area Area { get; set; }
+
+        [Reactive]
+        public Operator? Operator { get; set; }
+
+        [Reactive]
+        public ObservableCollection<Picket> Pickets { get; set; }
+
+        [Reactive]
+        public ObservableCollection<ProfilePoint> Points { get; set; }
+
         public List<(Picket pic, Point proj)> OrderPickets()
         {
             if (Points is null || Pickets is null || Points.Count < 2) return new();
@@ -79,17 +91,10 @@ namespace GeoGravityOverDose.Models
                 vd.DrawText($"{p.X},{p.Y}", p.X, p.Y, Brushes.Black, 1.3);
         }
 
-        [Reactive]
-        public Area Area { get; set; }
-
-        [Reactive]
-        public Operator? Operator { get; set; }
-
-        [Reactive]
-        public ObservableCollection<Picket> Pickets { get; set; }
-
-        [Reactive]
-        public ObservableCollection<ProfilePoint> Points { get; set; }
+        public Profile(Area area)
+        {
+            Area=area;
+        }
     }
 
 }

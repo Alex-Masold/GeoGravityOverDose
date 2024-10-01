@@ -50,19 +50,35 @@ namespace GeoGravityOverDose.Views.Widget.AreaWidget
 
             _dataSource = new List<Area>();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 2; i < 12; i++)
             {
                 var Area = new Area()
                 {
                     Name="Поле кукурузы",
                     Points = new()
-                        {
-                            new() { X=0, Y=0 },
-                            new() { X=i/2, Y=2 },
-                            new() { X=i/2 * 3, Y= i/2 * 5 },
-                            new() { X=i/3, Y=i/3 * 3 },
-                        }
+                    {
+                        new() { X=0, Y=i },
+                        new() { X=2*i, Y=2 },
+                        new() { X=3*i, Y=3*i },
+                        new() { X=3, Y=3*i },
+                    },
+                    Profiles = new()
+
                 };
+
+                var Profile = new Profile(Area)
+                {
+                    Operator=new() { FirstName="Илья", LastName="Буров" },
+                    Points= new()
+                    {
+                        new () {X=i, Y=i*2 },
+                        new () {X=i*2, Y=i * 2 },
+                    }
+
+                };
+
+                Area.Profiles.Add(Profile);
+
                 _dataSource.Add(Area);
             }
 
@@ -72,15 +88,15 @@ namespace GeoGravityOverDose.Views.Widget.AreaWidget
                     .Bind(out _filteredAreas)
                     .Subscribe();
 
-            AreaCardViewModel = new AreaCardViewModel();
+            SelectedArea = Areas.FirstOrDefault();
+
+            AreaCardViewModel = new AreaCardViewModel(SelectedArea);
 
             this.WhenAnyValue(vm => vm.SelectedArea)
             .Subscribe(Area =>
             {
                 AreaCardViewModel.Area = Area;
             });
-
-            SelectedArea = Areas.FirstOrDefault();
 
             AddAreaCommand = ReactiveCommand.Create(AddArea);
             DeleteAreaCommand = ReactiveCommand.Create<Area>(DeleteArea);
@@ -125,13 +141,14 @@ namespace GeoGravityOverDose.Views.Widget.AreaWidget
                     SelectedArea = Areas.FirstOrDefault();
                 });
         }
+
+
         public void AddArea()
         {
             var Area = new Area() { Name="New Area" };
             _AreasSource.Add(Area);
             SelectedArea = Area;
         }
-
         private void DeleteArea(Area Area)
         {
             var _deletedAreaIndex = Areas.IndexOf(Area);

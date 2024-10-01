@@ -9,6 +9,7 @@ namespace GeoGravityOverDose.Models
     {
         [Reactive]
         public string Name { get; set; }
+
         [Reactive]
         public string? Address { get; set; }
 

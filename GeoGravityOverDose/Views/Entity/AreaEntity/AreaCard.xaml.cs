@@ -25,6 +25,7 @@ namespace GeoGravityOverDose.Views.Entity.AreaEntity
         public AreaCard()
         {
             InitializeComponent();
+            DataContext = ViewModel;
         }
 
         public static readonly DependencyProperty ViewModelProperty =

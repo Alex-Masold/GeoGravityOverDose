@@ -96,11 +96,25 @@ namespace GeoGravityOverDose.Views.Shared
                 typeof(IReactiveCommand),
                 typeof(EntitiesList),
                 new PropertyMetadata(null));
-
+        
         public IReactiveCommand DeleteEntityCommand
         {
             get => (IReactiveCommand)(GetValue(DeleteEntityCommandProperty));
             set => SetValue(DeleteEntityCommandProperty, value);
+        }
+
+        
+
+        public static readonly DependencyProperty OtherAddEntityCommandProperty =
+            DependencyProperty.Register(
+                nameof(OtherAddEntityCommand),
+                typeof(IReactiveCommand),
+                typeof(EntitiesList),
+                new PropertyMetadata(null));
+        public IReactiveCommand OtherAddEntityCommand
+        {
+            get => (IReactiveCommand)GetValue(OtherAddEntityCommandProperty);
+            set => SetValue(OtherAddEntityCommandProperty, value);
         }
     }
 }
