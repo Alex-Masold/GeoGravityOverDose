@@ -10,12 +10,11 @@ namespace GeoGravityOverDose
     /// </summary>
     public partial class App : Application
     {
-        MainViewModel mainVM = new MainViewModel() { CurrentVM = new CustomerPresentationViewModel() };
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            new MainWindow() { DataContext = mainVM }.Show();
+            new MainWindow().Show();
         }
     }
 

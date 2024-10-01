@@ -24,7 +24,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                
+
                 <ui:ColorZone Margin="15,15,15,0" CornerRadius="10">
 
                     <Grid Margin="10,10,0,10">
@@ -36,18 +36,21 @@
                         <Button
                             x:Name="SearchButton"
                             Grid.Column="1"
-                            Command="{Binding SearchCommand}"
-                            CommandParameter="{Binding ElementName=SearchBox, Path=Text}"
                             Style="{StaticResource MaterialDesignToolButton}">
                             <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                </Grid.RowDefinitions>
                                 <ui:PackIcon
                                     x:Name="IconSearch"
                                     Width="24"
                                     Height="24"
+                                    HorizontalAlignment="Center"
                                     Kind="Magnify"
                                     Visibility="Visible" />
                                 <ProgressBar
                                     x:Name="SearchExecutingProgressBar"
+                                    Margin="2,2,2,2"
                                     IsIndeterminate="True"
                                     Style="{StaticResource MaterialDesignCircularProgressBar}"
                                     Visibility="Collapsed" />
@@ -67,7 +70,7 @@
                 </ui:ColorZone>
 
                 <shared:EntitiesList
-                    x:Name="CustomersList"
+                    x:Name="AreaList"
                     Grid.Row="1"
                     Margin="15"
                     AddEntityCommand="{Binding AddAreaCommand}"
@@ -77,7 +80,7 @@
             </Grid>
 
             <entity:AreaCard
-                x:Name="CustomerCard"
+                x:Name="AreaCard"
                 Grid.Column="1"
                 DataContext="{Binding CustomerCardViewModel}" />
 

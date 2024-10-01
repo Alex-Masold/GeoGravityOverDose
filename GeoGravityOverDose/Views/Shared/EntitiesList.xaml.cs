@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ReactiveUI;
+using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -67,38 +68,38 @@ namespace GeoGravityOverDose.Views.Shared
 
         public static readonly DependencyProperty AddEntityCommandProperty = DependencyProperty.Register(
               nameof(AddEntityCommand),
-              typeof(ICommand),
+              typeof(IReactiveCommand),
               typeof(EntitiesList),
               new PropertyMetadata(null));
 
-        public ICommand AddEntityCommand
+        public IReactiveCommand AddEntityCommand
         {
-            get => (ICommand)GetValue(AddEntityCommandProperty);
+            get => (IReactiveCommand)GetValue(AddEntityCommandProperty);
             set => SetValue(AddEntityCommandProperty, value);
         }
 
         public static readonly DependencyProperty CommandEntityCommandProperty = DependencyProperty.Register(
               nameof(CommandEntityCommand),
-              typeof(ICommand),
+              typeof(IReactiveCommand),
               typeof(EntitiesList),
               new PropertyMetadata(null));
 
-        public ICommand CommandEntityCommand
+        public IReactiveCommand CommandEntityCommand
         {
-            get => (ICommand)GetValue(CommandEntityCommandProperty);
+            get => (IReactiveCommand)GetValue(CommandEntityCommandProperty);
             set => SetValue(CommandEntityCommandProperty, value);
         }
 
         public static readonly DependencyProperty DeleteEntityCommandProperty =
             DependencyProperty.Register(
                 nameof(DeleteEntityCommand),
-                typeof(ICommand),
+                typeof(IReactiveCommand),
                 typeof(EntitiesList),
                 new PropertyMetadata(null));
 
-        public ICommand DeleteEntityCommand
+        public IReactiveCommand DeleteEntityCommand
         {
-            get => (ICommand)(GetValue(DeleteEntityCommandProperty));
+            get => (IReactiveCommand)(GetValue(DeleteEntityCommandProperty));
             set => SetValue(DeleteEntityCommandProperty, value);
         }
     }

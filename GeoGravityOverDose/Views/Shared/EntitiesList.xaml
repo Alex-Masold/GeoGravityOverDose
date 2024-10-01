@@ -51,7 +51,7 @@
                                 Command="{Binding DeleteEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 CommandParameter="{Binding}"
                                 Cursor="Hand"
-                                Visibility="{Binding AddEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}">
+                                    Visibility="{Binding DeleteEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}">
                                 <ui:PackIcon Kind="CloseCircle" />
                             </Button>
                             <Button

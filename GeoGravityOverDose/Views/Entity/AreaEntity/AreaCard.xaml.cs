@@ -20,11 +20,30 @@ namespace GeoGravityOverDose.Views.Entity.AreaEntity
     /// <summary>
     /// Логика взаимодействия для AreaCard.xaml
     /// </summary>
-    public partial class AreaCard : ReactiveUserControl<AreaCardViewModel>
+    public partial class AreaCard : UserControl, IViewFor<AreaCardViewModel>
     {
         public AreaCard()
         {
             InitializeComponent();
+        }
+
+        public static readonly DependencyProperty ViewModelProperty =
+           DependencyProperty.Register(
+               nameof(ViewModel),
+               typeof(AreaCardViewModel),
+               typeof(AreaCard),
+               new PropertyMetadata(null));
+
+        public AreaCardViewModel ViewModel
+        {
+            get => (AreaCardViewModel)GetValue(ViewModelProperty);
+            set => SetValue(ViewModelProperty, value);
+        }
+
+        object IViewFor.ViewModel
+        {
+            get => ViewModel;
+            set => ViewModel = (AreaCardViewModel)value;
         }
     }
 }

@@ -3,6 +3,7 @@ using GeoGravityOverDose.Models.Base;
 using GeoGravityOverDose.ViewModels.Base;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System.Reactive.Linq;
 using System.Windows.Media;
 
 namespace GeoGravityOverDose.Views.Entity.AreaEntuty
@@ -44,9 +45,11 @@ namespace GeoGravityOverDose.Views.Entity.AreaEntuty
         public AreaCardViewModel()
         {
             this.WhenAnyValue(x => x.SelectedPoint)
-            .Subscribe(_ => Redraw());
+                .Where(x => x != null)
+                .Subscribe(_ => Redraw());
 
             this.WhenAnyValue(x => x.SelectedProfile)
+                .Where(x => x != null)
                 .Subscribe(_ => Redraw());
         }
     }

@@ -29,7 +29,7 @@
             </Image>
         </ScrollViewer>
 
-        
-        <shared:EntitiesList Grid.Row="1"/>
+
+        <shared:EntitiesList Grid.Row="1" />
     </Grid>
 </UserControl>

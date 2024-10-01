@@ -1,18 +1,20 @@
 ﻿using DynamicData;
 using GeoGravityOverDose.Models;
-using GeoGravityOverDose.Views.Entity.AreaEntity;
-using ReactiveUI.Fody.Helpers;
+using GeoGravityOverDose.ViewModels.Base;
+using GeoGravityOverDose.Views.Entity.AreaEntuty;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System.Collections.ObjectModel;
 using System.Reactive;
-using GeoGravityOverDose.ViewModels.Base;
 using System.Reactive.Linq;
-using GeoGravityOverDose.Views.Entity.AreaEntuty;
 
 namespace GeoGravityOverDose.Views.Widget.AreaWidget
 {
-    public class AreaPresentationViewModel : BaseViewModel
+    public class AreaPresentationViewModel : BaseViewModel, IRoutableViewModel
     {
+        public string UrlPathSegment => "AreaPresentation";
+        public IScreen HostScreen { get; }
+
         private readonly SourceList<Area> _AreasSource = new SourceList<Area>();
         private ReadOnlyObservableCollection<Area> _filteredAreas;
         public ReadOnlyObservableCollection<Area> Areas => _filteredAreas;
@@ -40,9 +42,10 @@ namespace GeoGravityOverDose.Views.Widget.AreaWidget
         public IReactiveCommand<Unit, Unit> CancelSearch { get; }
         public IReactiveCommand<string, ICollection<Area>> SearchCommand { get; }
 
-        public AreaPresentationViewModel()
+        public AreaPresentationViewModel(IScreen screen)
         {
-            AreaCardViewModel = new AreaCardViewModel();
+            HostScreen = screen;
+
             _cancellationToken = new CancellationTokenSource();
 
             _dataSource = new List<Area>();
@@ -58,39 +61,8 @@ namespace GeoGravityOverDose.Views.Widget.AreaWidget
                             new() { X=i/2, Y=2 },
                             new() { X=i/2 * 3, Y= i/2 * 5 },
                             new() { X=i/3, Y=i/3 * 3 },
-                        },
-                    Profiles=new() {
-                                new()
-                                {
-                                    Operator=new() { FirstName="Илья", LastName="Буров" },
-                                    Points= new()
-                                    {
-                                        new () {X=2, Y=2 },
-                                        new () {X=8, Y=4 },
-                                        new () {X=17, Y=4 },
-                                        new () {X=25, Y=6 },
-                                        new () {X=32, Y=7 },
-                                    }
-                                },
-                                new()
-                                {
-
-                                    Operator=new() { FirstName="Мамаро", LastName="Воруб" },
-                                    Points= new()
-                                    {
-                                        new () {X=4, Y=20 },
-                                        new () {X=7, Y=15 },
-                                        new () {X=11, Y=17 },
-                                        new () {X=17, Y=22 },
-                                        new () {X=23, Y=18 },
-                                    }
-                                }
-                    }  
+                        }
                 };
-
-                for (int j = 0; j < 5; j++)
-                {
-                }
                 _dataSource.Add(Area);
             }
 
@@ -99,6 +71,8 @@ namespace GeoGravityOverDose.Views.Widget.AreaWidget
             _AreasSource.Connect()
                     .Bind(out _filteredAreas)
                     .Subscribe();
+
+            AreaCardViewModel = new AreaCardViewModel();
 
             this.WhenAnyValue(vm => vm.SelectedArea)
             .Subscribe(Area =>
@@ -153,7 +127,7 @@ namespace GeoGravityOverDose.Views.Widget.AreaWidget
         }
         public void AddArea()
         {
-            var Area = new Area() { Name="New Area"};
+            var Area = new Area() { Name="New Area" };
             _AreasSource.Add(Area);
             SelectedArea = Area;
         }

@@ -10,8 +10,11 @@ using System.Reactive.Linq;
 
 namespace GeoGravityOverDose.Views.Widget.CustomerWidget
 {
-    public class CustomerPresentationViewModel : BaseViewModel
+    public class CustomerPresentationViewModel : BaseViewModel, IRoutableViewModel
     {
+        public string UrlPathSegment => "CustomerPresentation";
+        public IScreen HostScreen { get; }
+
         private readonly SourceList<Customer> _customersSource = new SourceList<Customer>();
         private ReadOnlyObservableCollection<Customer> _filteredCustomers;
         public ReadOnlyObservableCollection<Customer> Customers => _filteredCustomers;
@@ -39,8 +42,10 @@ namespace GeoGravityOverDose.Views.Widget.CustomerWidget
         public IReactiveCommand<Unit, Unit> CancelSearch { get; }
         public IReactiveCommand<string, ICollection<Customer>> SearchCommand { get; }
 
-        public CustomerPresentationViewModel()
+        public CustomerPresentationViewModel(IScreen screen)
         {
+            HostScreen = screen;
+
             CustomerCardViewModel = new CustomerCardViewModel();
             _cancellationToken = new CancellationTokenSource();
 

@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="clr-namespace:GeoGravityOverDose.Views.Shared"
     xmlns:ui="http://materialdesigninxaml.net/winfx/xaml/themes"
-    
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
