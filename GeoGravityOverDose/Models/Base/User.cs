@@ -33,11 +33,6 @@ namespace GeoGravityOverDose.Models.Base
                 fullNameData => fullNameData.Family)
                 .Select(t => $"{t.Item1} {t.Item2} {t.Item3}")
                 .ToPropertyEx(this, x => x.FullName);
-
-            this.WhenAnyValue(
-               idData => idData. Id)
-                .Select(t => $"{t}")
-                .ToProperty(this, x => x.FirstName);
         }
     }
 }

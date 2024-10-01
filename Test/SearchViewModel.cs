@@ -77,11 +77,11 @@ namespace Test
 
             // Автопоиск
             this.WhenAnyValue(vm => vm.SearchQuery)
-    .Where(_ => AutoSearch && !string.IsNullOrWhiteSpace(_))  // Автопоиск включен
-    .Throttle(TimeSpan.FromMilliseconds(300), RxApp.MainThreadScheduler)  // Ждем 300 мс
-    .Select(query => Search.Execute(query))  // Вызываем команду поиска
-    .Switch()  // Используем Switch() для автоматической отмены предыдущего поиска
-    .Subscribe();
+                .Where(_ => AutoSearch && !string.IsNullOrWhiteSpace(_))  // Автопоиск включен
+                .Throttle(TimeSpan.FromMilliseconds(300), RxApp.MainThreadScheduler)  // Ждем 300 мс
+                .Select(query => Search.Execute(query))  // Вызываем команду поиска
+                .Switch()  // Используем Switch() для автоматической отмены предыдущего поиска
+                .Subscribe();
 
             this.WhenAnyValue(vm => vm.SearchQuery)
                 .Where(query => string.IsNullOrEmpty(query))

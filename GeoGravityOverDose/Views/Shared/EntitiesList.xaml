@@ -38,6 +38,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <TextBlock
@@ -46,12 +47,22 @@
                                 Text="{Binding FullName}" />
                             <Button
                                 x:Name="DeleteEntityButton"
-                                Grid.Column="1"
+                                Grid.Column="2"
                                 Command="{Binding DeleteEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 CommandParameter="{Binding}"
                                 Cursor="Hand"
-                                    Visibility="{Binding AddEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}">
+                                Visibility="{Binding AddEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}">
                                 <ui:PackIcon Kind="CloseCircle" />
+                            </Button>
+                            <Button
+                                x:Name="CommandEntityButton"
+                                Grid.Column="1"
+                                Margin="0,0,5,0"
+                                Command="{Binding CommandEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding}"
+                                Cursor="Hand"
+                                Visibility="{Binding CommandEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}">
+                                <ui:PackIcon Kind="ArrowRightCircle" />
                             </Button>
                         </Grid>
                     </DataTemplate>

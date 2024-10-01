@@ -1,12 +1,17 @@
 ﻿using GeoGravityOverDose.Models.Base;
 using ReactiveUI.Fody.Helpers;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeoGravityOverDose.Models
 {
-    public class ProfilePoint : IdClass
+    public class AreaPoint : IdClass
     {
+        public override string ToString()
+        {
+            return $"{X},{Y}";
+        }
+
         [Reactive]
         public double X { get; set; }
 
@@ -14,9 +19,8 @@ namespace GeoGravityOverDose.Models
         public double Y { get; set; }
 
         [Reactive]
-        public Profile Profile { get; set; }
-
-
+        public Area Area { get; set; }
+        
         [NotMapped]
         public Point P => new Point(X, Y);
     }

@@ -10,7 +10,7 @@ using ReactiveUI;
 using System.Reactive;
 using System.Windows;
 
-namespace GeoGravityOverDose.Views.Entity.CustomerModel
+namespace GeoGravityOverDose.Views.Entity.CustomerEntity
 {
     public class CustomerCardViewModel : BaseViewModel
     {

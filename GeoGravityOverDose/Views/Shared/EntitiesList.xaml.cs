@@ -77,6 +77,18 @@ namespace GeoGravityOverDose.Views.Shared
             set => SetValue(AddEntityCommandProperty, value);
         }
 
+        public static readonly DependencyProperty CommandEntityCommandProperty = DependencyProperty.Register(
+              nameof(CommandEntityCommand),
+              typeof(ICommand),
+              typeof(EntitiesList),
+              new PropertyMetadata(null));
+
+        public ICommand CommandEntityCommand
+        {
+            get => (ICommand)GetValue(CommandEntityCommandProperty);
+            set => SetValue(CommandEntityCommandProperty, value);
+        }
+
         public static readonly DependencyProperty DeleteEntityCommandProperty =
             DependencyProperty.Register(
                 nameof(DeleteEntityCommand),

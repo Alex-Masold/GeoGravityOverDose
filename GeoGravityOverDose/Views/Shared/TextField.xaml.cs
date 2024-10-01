@@ -9,7 +9,7 @@ namespace GeoGravityOverDose.Views.Shared
 {
     /// <summary>
     /// Логика взаимодействия для TextField.xaml
-    /// </summary>
+    /// </summary>  
     public partial class TextField : UserControl
     {
         private string _previousValue;

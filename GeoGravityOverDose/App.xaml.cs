@@ -1,5 +1,6 @@
 ﻿using GeoGravityOverDose.ViewModels;
 using GeoGravityOverDose.Views.Pages;
+using GeoGravityOverDose.Views.Widget.CustomerWidget;
 using System.Windows;
 
 namespace GeoGravityOverDose
