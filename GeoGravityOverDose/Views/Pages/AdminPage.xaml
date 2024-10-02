@@ -16,7 +16,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="19*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" Background="{DynamicResource MaterialDesignCardBackground}">
@@ -29,7 +29,7 @@
                 Grid.Row="1"
                 VerticalAlignment="Top"
                 SelectedIndex="0">
-                <ListBoxItem x:Name="CustomerNav">
+                <ListBoxItem x:Name="CustomersNav">
                     <ListBoxItem.Style>
                         <Style BasedOn="{StaticResource MaterialDesign3.NavigationRailPrimaryListBoxItem}" TargetType="ListBoxItem">
                             <Setter Property="ui:NavigationRailAssist.IconSize" Value="32" />
@@ -37,9 +37,9 @@
                             <Setter Property="ui:NavigationRailAssist.UnselectedIcon" Value="AccountTieOutline" />
                         </Style>
                     </ListBoxItem.Style>
-                    <TextBlock Text="Customer" />
+                    <TextBlock Text="Customers" />
                 </ListBoxItem>
-                <ListBoxItem x:Name="ProgectNav">
+                <ListBoxItem x:Name="ProgectsNav">
                     <ListBoxItem.Style>
                         <Style BasedOn="{StaticResource MaterialDesign3.NavigationRailPrimaryListBoxItem}" TargetType="ListBoxItem">
                             <Setter Property="ui:NavigationRailAssist.IconSize" Value="32" />
@@ -47,9 +47,9 @@
                             <Setter Property="ui:NavigationRailAssist.UnselectedIcon" Value="ListBoxOutline" />
                         </Style>
                     </ListBoxItem.Style>
-                    <TextBlock Text="Project" />
+                    <TextBlock Text="Projects" />
                 </ListBoxItem>
-                <ListBoxItem x:Name="AreaNav">
+                <ListBoxItem x:Name="AreasNav">
                     <ListBoxItem.Style>
                         <Style BasedOn="{StaticResource MaterialDesign3.NavigationRailPrimaryListBoxItem}" TargetType="ListBoxItem">
                             <Setter Property="ui:NavigationRailAssist.IconSize" Value="32" />
@@ -57,7 +57,17 @@
                             <Setter Property="ui:NavigationRailAssist.UnselectedIcon" Value="ImageOutline" />
                         </Style>
                     </ListBoxItem.Style>
-                    <TextBlock Text="Area" />
+                    <TextBlock Text="Areas" />
+                </ListBoxItem>
+                <ListBoxItem x:Name="ProfilesNav">
+                    <ListBoxItem.Style>
+                        <Style BasedOn="{StaticResource MaterialDesign3.NavigationRailPrimaryListBoxItem}" TargetType="ListBoxItem">
+                            <Setter Property="ui:NavigationRailAssist.IconSize" Value="32" />
+                            <Setter Property="ui:NavigationRailAssist.SelectedIcon" Value="ChartBox" />
+                            <Setter Property="ui:NavigationRailAssist.UnselectedIcon" Value="ChartBoxOutline" />
+                        </Style>
+                    </ListBoxItem.Style>
+                    <TextBlock Text="Profiles" />
                 </ListBoxItem>
             </ListBox>
         </Grid>

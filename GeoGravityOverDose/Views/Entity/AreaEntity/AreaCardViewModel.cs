@@ -1,6 +1,4 @@
-﻿using Castle.Core.Resource;
-using CommunityToolkit.Mvvm.Input;
-using GeoGravityOverDose.Models;
+﻿using GeoGravityOverDose.Models;
 using GeoGravityOverDose.Models.Base;
 using GeoGravityOverDose.ViewModels.Base;
 using ReactiveUI;
@@ -11,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+
 
 namespace GeoGravityOverDose.Views.Entity.AreaEntuty
 {
@@ -28,12 +27,20 @@ namespace GeoGravityOverDose.Views.Entity.AreaEntuty
         [Reactive]
         public Profile SelectedProfile { get; set; }
 
+        public IReactiveCommand<Unit, Unit> RedrawCommand { get; }
+
         public IReactiveCommand<Unit, Unit> AddPointCommand { get; }
         public IReactiveCommand<Unit, Unit> GeneratePointCommand { get; }
         public IReactiveCommand<AreaPoint, Unit> DeletePointCommand { get; }
 
+        public IReactiveCommand<Unit, Unit> AddProfileCommand { get; }
+        public IReactiveCommand<Profile, Unit> DeleteProfileCommand { get; }
+
         public IReactiveCommand<object, Unit> ZoomCommand { get; }
-        private void Redraw()
+
+        public int MaxLengthName { get; set; } = 50;
+
+        public void Redraw()
         {
             var vd = new VisDraw();
 
@@ -94,19 +101,44 @@ namespace GeoGravityOverDose.Views.Entity.AreaEntuty
         }
         private void DeletePoint(AreaPoint point)
         {
-            var _deletedCustomerIndex = Area.Points.IndexOf(point);
+            var _deletedPointIndex = Area.Points.IndexOf(point);
             var _SelectedPointIndex = Area.Points.IndexOf(SelectedPoint);
             Area.Points.Remove(point);
             Redraw();
 
-            if (_deletedCustomerIndex == _SelectedPointIndex)
+            if (_deletedPointIndex == _SelectedPointIndex)
             {
-                if (_deletedCustomerIndex == 0)
+                if (_deletedPointIndex == 0)
                 { SelectedPoint = Area.Points.FirstOrDefault(); }
-                else if (_deletedCustomerIndex == Area.Points.Count)
+                else if (_deletedPointIndex == Area.Points.Count)
                 { SelectedPoint = Area.Points.LastOrDefault(); }
-                else if (_deletedCustomerIndex > 0 && _deletedCustomerIndex < Area.Points.Count)
-                { SelectedPoint = Area.Points[_deletedCustomerIndex]; }
+                else if (_deletedPointIndex > 0 && _deletedPointIndex < Area.Points.Count)
+                { SelectedPoint = Area.Points[_deletedPointIndex]; }
+            }
+        }
+
+        private void AddProfile()
+        {
+            var newProfile = new Profile(Area);
+            Area.Profiles.Add(newProfile);
+            SelectedProfile = newProfile;
+            Redraw();
+        }
+        private void DeleteProfile(Profile profile)
+        {
+            var _deletedProfileIndex = Area.Profiles.IndexOf(profile);
+            var _SelectedProfileIndex = Area.Profiles.IndexOf(SelectedProfile);
+            Area.Profiles.Remove(profile);
+            Redraw();
+
+            if (_deletedProfileIndex == _SelectedProfileIndex)
+            {
+                if (_deletedProfileIndex == 0)
+                { SelectedProfile = Area.Profiles.FirstOrDefault(); }
+                else if (_deletedProfileIndex == Area.Points.Count)
+                { SelectedProfile = Area.Profiles.LastOrDefault(); }
+                else if (_deletedProfileIndex > 0 && _deletedProfileIndex < Area.Profiles.Count)
+                { SelectedProfile = Area.Profiles[_deletedProfileIndex]; }
             }
         }
         public AreaCardViewModel(Area area)
@@ -114,12 +146,18 @@ namespace GeoGravityOverDose.Views.Entity.AreaEntuty
             Area = area;
 
             ZoomCommand = ReactiveCommand.Create<object>(Zoom);
+
+            RedrawCommand = ReactiveCommand.Create(Redraw);
+
             AddPointCommand = ReactiveCommand.Create(AddPoint);
             GeneratePointCommand = ReactiveCommand.Create(GeneratePoint);
             DeletePointCommand = ReactiveCommand.Create<AreaPoint>(DeletePoint);
 
+            AddProfileCommand = ReactiveCommand.Create(AddProfile);
+            DeleteProfileCommand = ReactiveCommand.Create<Profile>(DeleteProfile);
+
             this.WhenAnyValue(x => x.SelectedPoint)
-                .Subscribe(_ => Redraw());  
+                .Subscribe(_ => Redraw());
 
             this.WhenAnyValue(x => x.SelectedProfile)
                 .Subscribe(_ => Redraw());

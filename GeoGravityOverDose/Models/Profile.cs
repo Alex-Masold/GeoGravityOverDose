@@ -1,6 +1,8 @@
 ﻿using GeoGravityOverDose.Models.Base;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Collections.ObjectModel;
+using System.Reactive.Linq;
 using System.Windows.Media;
 using Point = System.Windows.Point;
 
@@ -94,6 +96,10 @@ namespace GeoGravityOverDose.Models
         public Profile(Area area)
         {
             Area=area;
+
+            this.WhenAnyValue(profile => profile.Operator)
+       .Select(op => op != null && !string.IsNullOrEmpty(op.FullName) ? op.FullName : "Не назначено")
+       .ToPropertyEx(this, x => x.FullName);
         }
     }
 

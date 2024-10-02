@@ -17,7 +17,7 @@ namespace GeoGravityOverDose.Views.Widget.AreaWidget
 
         private readonly SourceList<Area> _AreasSource = new SourceList<Area>();
         private ReadOnlyObservableCollection<Area> _filteredAreas;
-        public ReadOnlyObservableCollection<Area> Areas => _filteredAreas;
+        public ReadOnlyObservableCollection<Area> Areas => _filteredAreas;  
 
         private readonly ICollection<Area> _dataSource;
 
@@ -50,7 +50,7 @@ namespace GeoGravityOverDose.Views.Widget.AreaWidget
 
             _dataSource = new List<Area>();
 
-            for (int i = 2; i < 12; i++)
+            for (int i = 2; i < 5; i++)
             {
                 var Area = new Area()
                 {
@@ -145,7 +145,7 @@ namespace GeoGravityOverDose.Views.Widget.AreaWidget
 
         public void AddArea()
         {
-            var Area = new Area() { Name="New Area" };
+            var Area = new Area() { Name="New Area", Points = new(), Profiles = new() };
             _AreasSource.Add(Area);
             SelectedArea = Area;
         }

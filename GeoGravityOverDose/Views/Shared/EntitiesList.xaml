@@ -24,14 +24,14 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <ListBox
                 x:Name="List"
+                Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Grid.Row="0"
                 HorizontalContentAlignment="Stretch"
                 d:ItemsSource="{d:SampleData ItemCount=15}"
                 ItemsSource="{Binding Entities, RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -58,7 +58,7 @@
                                 Command="{Binding DeleteEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 CommandParameter="{Binding}"
                                 Cursor="Hand"
-                                    Visibility="{Binding DeleteEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}">
+                                Visibility="{Binding DeleteEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}">
                                 <ui:PackIcon Kind="CloseCircle" />
                             </Button>
                             <Button
@@ -90,19 +90,20 @@
                 Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}"
                 Visibility="{Binding AddEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}" />
 
-            <Button x:Name="OhterAddEntityButton"
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="0,5,28,-20"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Panel.ZIndex="1"
-                    Command="{Binding OtherAddEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                    Content="{ui:PackIcon Kind=cached,
-                           Size=22}"
-                    DockPanel.Dock="Bottom"
-                    Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}"
-                    Visibility="{Binding OtherAddEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}" />
+            <Button
+                x:Name="OhterAddEntityButton"
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,5,28,-20"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Panel.ZIndex="1"
+                Command="{Binding OtherAddEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Content="{ui:PackIcon Kind=cached,
+                                      Size=22}"
+                DockPanel.Dock="Bottom"
+                Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}"
+                Visibility="{Binding OtherAddEntityCommand, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource NullToVisibilityConverter}}" />
         </Grid>
     </ui:ColorZone>
 </UserControl>

@@ -4,6 +4,7 @@ using System.Reactive;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static GeoGravityOverDose.Views.Shared.Utilities.NumericValidationRule;
 
 namespace GeoGravityOverDose.Views.Shared
 {
@@ -141,6 +142,18 @@ namespace GeoGravityOverDose.Views.Shared
             }
         }
 
+        public static readonly DependencyProperty TypeFieldProperty =
+        DependencyProperty.Register(
+            nameof(TypeField),
+            typeof(FieldType),
+            typeof(TextField),
+            new PropertyMetadata(FieldType.Default)); // Установите значение по умолчанию
+
+        public FieldType TypeField
+        {
+            get => (FieldType)GetValue(TypeFieldProperty);
+            set => SetValue(TypeFieldProperty, value);
+        }
         public TextField()
         {
             InitializeComponent();

@@ -13,6 +13,12 @@ namespace GeoGravityOverDose.Models
         [Reactive]
         public string? Address { get; set; }
 
+        [Reactive]
+        public Customer Customer { get; set; }
+
+        [Reactive]
+        public ICollection<Area> Areas { get; set; }
+
         public Project()
         {
             this.WhenAnyValue(

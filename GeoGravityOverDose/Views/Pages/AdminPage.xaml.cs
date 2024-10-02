@@ -23,9 +23,9 @@ namespace GeoGravityOverDose.Views.Pages
             {
                 this.OneWayBind(ViewModel, vm => vm.Router, v => v.RoutedViewHost.Router)
                 .DisposeWith(disposables);
-                this.BindCommand(ViewModel, vm => vm.GoCustomerPresentation, v => v.CustomerNav)
+                this.BindCommand(ViewModel, vm => vm.GoCustomerPresentation, v => v.CustomersNav)
                 .DisposeWith(disposables);
-                this.BindCommand(ViewModel, vm => vm.GoAreaPresentation, v => v.AreaNav)
+                this.BindCommand(ViewModel, vm => vm.GoAreaPresentation, v => v.AreasNav)
                     .DisposeWith(disposables);
             });
         }

@@ -21,16 +21,8 @@ namespace GeoGravityOverDose.Models
         [Reactive]
         public ObservableCollection<Profile> Profiles { get; set; }
 
-
-        // Используем ObservableAsProperty для CalcArea
-        [ObservableAsProperty]
-        public double CalcArea { get; }
-
         public Area()
         {
-            this.WhenAnyValue(x => x.Points)
-                .Select(_ => CalculateArea())
-                .ToPropertyEx(this, x => x.CalcArea);
 
             this.WhenAnyValue(
                 fullNameData => fullNameData.Name)
@@ -45,22 +37,6 @@ namespace GeoGravityOverDose.Models
             foreach (var p in Points)
                 gd.DrawText($"{p.X},{p.Y}", p.X, p.Y, Brushes.Black, 1.5);
         }
-
-        // Метод для вычисления площади
-        private double CalculateArea()
-        {
-            if (Points == null || Points.Count < 3) return 0;
-
-            double area = 0;
-            for (int i = 0; i < Points.Count; i++)
-            {
-                int j = (i + 1) % Points.Count;
-                area += Points[i].X * Points[j].Y;
-                area -= Points[j].X * Points[i].Y;
-            }
-            return Math.Abs(area / 2.0);
-        }
-
 
         public bool IsCorrect()
         {

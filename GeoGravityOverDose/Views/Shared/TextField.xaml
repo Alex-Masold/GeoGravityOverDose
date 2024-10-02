@@ -14,7 +14,7 @@
     <TextBox
         x:Name="textBox"
         Margin="10"
-        Padding="8,15,4,4"
+        TextWrapping="WrapWithOverflow"
         materialDesign:TextFieldAssist.PrefixText="{Binding PrefixText, RelativeSource={RelativeSource AncestorType=UserControl}}"
         KeyDown="TextBox_KeyDown"
         MaxLength="{Binding MaxLength, RelativeSource={RelativeSource AncestorType=UserControl}}"

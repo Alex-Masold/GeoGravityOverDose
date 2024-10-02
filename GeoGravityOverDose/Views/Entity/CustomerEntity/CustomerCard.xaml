@@ -11,7 +11,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid Margin="15">
+    <Grid Margin="0, 15, 15, 15">
         <TabControl VerticalAlignment="Stretch">
             <TabItem Header="Личные данные">
                 <ScrollViewer
@@ -24,7 +24,7 @@
                         CornerRadius="10">
                         <StackPanel>
                             <Expander Background="Transparent" Header="{Binding Customer.FullName}">
-                                <StackPanel VerticalAlignment="Center">
+                                <StackPanel>
                                     <shared:TextField
                                         x:Name="FirstNameField"
                                         CallBackCommand="{Binding TestMessageCommand}"
@@ -38,6 +38,7 @@
                                         Label="Отчество/Второе имя"
                                         MaxLength="{Binding MaxLengthName}"
                                         Text="{Binding Customer.LastName}" />
+                                    
                                     <shared:TextField
                                         x:Name="FamilyField"
                                         Label="Фамилия"
