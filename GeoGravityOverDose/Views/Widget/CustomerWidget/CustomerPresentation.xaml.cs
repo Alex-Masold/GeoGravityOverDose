@@ -39,10 +39,10 @@ namespace GeoGravityOverDose.Views.Widget.CustomerWidget
                 this.OneWayBind(ViewModel, vm => vm.Customers, v => v.CustomersList.Entities).DisposeWith(disposables);
                 this.Bind(ViewModel, vm => vm.SelectedCustomer, v => v.CustomersList.SelectedEntity).DisposeWith(disposables);
                 this.OneWayBind(ViewModel, vm => vm.AddCustomerCommand, v => v.CustomersList.AddEntityCommand).DisposeWith(disposables); ;
-                this.OneWayBind(ViewModel, vm => vm.DeleteCustomerCommand, v => v.CustomersList.DeleteEntityCommand).DisposeWith(disposables); ;
+                this.OneWayBind(ViewModel, vm => vm.DeleteCustomerCommand, v => v.CustomersList.DeleteEntityCommand).DisposeWith(disposables);
 
                 this.OneWayBind(ViewModel, vm => vm.CustomerCardViewModel, v => v.CustomerCard.DataContext).DisposeWith(disposables);
-
+                this.OneWayBind(ViewModel, vm => vm.NavigateToProjectCommand, v => v.CustomerCard.ProjectList.CommandEntityCommand).DisposeWith(disposables);
             });
         }   
 

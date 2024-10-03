@@ -16,10 +16,10 @@ namespace GeoGravityOverDose.Models
         public Project Project { get; set; }
 
         [Reactive]
-        public ObservableCollection<AreaPoint> Points { get; set; }
+        public ObservableCollection<AreaPoint> Points { get; set; } = new();
 
         [Reactive]
-        public ObservableCollection<Profile> Profiles { get; set; }
+        public ObservableCollection<Profile> Profiles { get; set; } = new();
 
         public Area()
         {

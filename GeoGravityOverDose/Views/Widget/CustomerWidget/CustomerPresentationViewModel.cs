@@ -7,6 +7,7 @@ using ReactiveUI.Fody.Helpers;
 using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
 
 namespace GeoGravityOverDose.Views.Widget.CustomerWidget
 {
@@ -37,6 +38,7 @@ namespace GeoGravityOverDose.Views.Widget.CustomerWidget
         //Управление Customer
         public IReactiveCommand<Unit, Unit> AddCustomerCommand { get; }
         public IReactiveCommand<Customer, Unit> DeleteCustomerCommand { get; }
+        public IReactiveCommand<Project, Unit> NavigateToProjectCommand { get; }
 
         //Поиск
         public IReactiveCommand<Unit, Unit> CancelSearch { get; }
@@ -79,6 +81,7 @@ namespace GeoGravityOverDose.Views.Widget.CustomerWidget
 
             AddCustomerCommand = ReactiveCommand.Create(AddCustomer);
             DeleteCustomerCommand = ReactiveCommand.Create<Customer>(DeleteCustomer);
+            NavigateToProjectCommand = ReactiveCommand.Create<Project>(_ => MessageBox.Show("!"));
 
             CancelSearch = ReactiveCommand.Create(() =>
                        {

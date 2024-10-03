@@ -1,6 +1,4 @@
 ﻿using GeoGravityOverDose.ViewModels;
-using GeoGravityOverDose.Views.Entity.AreaEntity;
-using GeoGravityOverDose.Views.Entity.AreaEntuty;
 using ReactiveUI;
 using System.Reactive.Disposables;
 using System.Windows;
@@ -25,6 +23,8 @@ namespace GeoGravityOverDose.Views.Pages
                 .DisposeWith(disposables);
                 this.BindCommand(ViewModel, vm => vm.GoCustomerPresentation, v => v.CustomersNav)
                 .DisposeWith(disposables);
+                this.BindCommand(ViewModel, vm => vm.GoProjectPresentation, v => v.ProgectsNav)
+                    .DisposeWith(disposables);
                 this.BindCommand(ViewModel, vm => vm.GoAreaPresentation, v => v.AreasNav)
                     .DisposeWith(disposables);
             });
